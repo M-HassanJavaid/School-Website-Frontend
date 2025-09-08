@@ -57,7 +57,7 @@ const WhyUS = () => {
     return (
         <section className={styles.whyUsSection}>
             <h1 className={styles.whyUsHeading} >Why choose us?</h1>
-            <p className={styles.WhyUsPara} ref={WhyUsPara}>At <span className={styles.schoolName}>Rab Nawaz English Grammar Secondary School</span>, we provide more than just an education—we create a safe,
+            <p className={styles.WhyUsPara} ref={WhyUsPara}>At <span className={styles.schoolName}>English Grammar Secondary School</span>, we provide more than just an education—we create a safe,
                 supportive, and inspiring environment where every child can thrive. With passionate teachers,
                 modern learning resources, and a focus on both academic excellence and personal growth, we help
                 students discover their strengths and prepare them for a bright future.</p>

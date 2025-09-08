@@ -1,13 +1,29 @@
-# React + Vite
+# 🎓 Animated School Website Frontend  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An interactive and visually engaging school website built with **React**, styled with **Vanilla CSS**, and powered by **GSAP** + **ScrollTrigger** animations. The project includes a fully functional **Contact Us form** and an **Admission form**, making it both attractive and practical.  
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🏫 Introduction  
 
-## Expanding the ESLint configuration
+This project is a **modern animated school website frontend** that provides smooth scrolling effects, eye-catching animations, and responsive design. It was created to demonstrate how **GSAP** and **ScrollTrigger** can be integrated into a React app for a professional and dynamic user experience.  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-"# School-Website-Frontend" 
+---
+
+## ✨ Features  
+
+- 🎨 **Animated UI** using GSAP + ScrollTrigger  
+- 📱 **Responsive design** for all devices  
+- 📝 **Contact Us Form** for inquiries  
+- 🏫 **Admission Form** for student applications  
+- ⚡ **Smooth scrolling animations**  
+- 🌐 SEO-friendly structure  
+
+---
+
+## 🛠 Tech Stack  
+
+- **React** – Frontend framework  
+- **Vanilla CSS** – Styling  
+- **GSAP & ScrollTrigger** – Animations  
+- **JavaScript (ES6+)** – Core logic  

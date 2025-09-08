@@ -1,0 +1,125 @@
+.imgContainer {
+    background-color: white;
+    flex-shrink: 0;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    border-radius: 10px;
+    overflow: hidden;
+
+
+}
+
+.imgContainer>img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+.message {
+    color: var(--secondary-color-2);
+    font-size: 1.2rem;
+}
+
+.PrincipleMessageHeading {
+    color: var(--secondary-color);
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    text-align: center;
+    align-content: center;
+    font-size: 2.5rem;
+}
+
+.messageContainer {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: 10px;
+    padding-inline: 150px;
+    text-align: center;
+    position: relative;
+    gap: 50px;
+}
+
+.invertedComma1 {
+    position: absolute;
+    top: -75px;
+    left: 35px;
+    height: 50px;
+}
+
+.invertedComma2 {
+    position: absolute;
+    bottom: -10px;
+    right: 80px;
+    height: 50px;
+    rotate: 180deg;
+}
+
+.PrincipleMessage {
+    min-height: 100vh;
+    padding-block: 100px;
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    grid-template-rows: 100px 1fr;
+    gap: 10px;
+    padding-inline: 30px;
+}
+
+@media (max-width: 1040px) {
+    .PrincipleMessage {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 600px minmax(100px , auto) 1fr;
+    }
+
+    .imgContainer {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 1;
+        grid-row-end: 2;
+        border-radius: 10px;
+    }
+
+    .PrincipleMessageHeading {
+        grid-row-start: 2;
+        grid-row-end: 3;
+        grid-column-start: 1;
+        grid-column-end: 2;
+    }
+
+    .messageContainer {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 3;
+        grid-row-end: 4;
+    }
+
+    .imgContainer>img {
+        object-fit: contain;
+        object-position: center;
+        border-radius: 20px;
+    }
+
+    .imgContainer{
+        background-color: var(--primary-color);
+    }
+}
+
+@media (max-width: 700px) {
+
+    .messageContainer{
+        padding: 20px;
+    }
+
+
+}

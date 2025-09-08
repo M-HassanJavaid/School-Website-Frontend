@@ -1,0 +1,27 @@
+.iframe{
+    /* height: 450px; */
+    width: 100%;
+    margin-block: 10px;
+    display: block;
+    border-radius: 10px;
+    border: 10px solid var(--secondary-color);
+    aspect-ratio: 1/1;
+}
+
+.btn{
+    display: block;
+    width: 100%;
+    margin-inline: 0px;
+}
+
+.campusName{
+    font-size: 2.5rem;
+    color: var(--secondary-color-2);
+    text-align: center;
+}
+
+.card{
+    margin-block: 20px;
+    width: calc(100% - 20px);
+    max-width: 600px;
+}

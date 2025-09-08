@@ -1,0 +1,14 @@
+.heading{
+    font-size: 3.5rem;
+    color: var(--secondary-color);
+    text-align: center;
+    padding: 20px;
+}
+
+.cardContainer{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+}

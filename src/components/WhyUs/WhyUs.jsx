@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react"
-import styles from "./WhyUS.module.css"
+import styles from "./WhyUs.module.css"
 import AchievementCard from "../AchievementCard/AchievementCard.jsx"
 import gsap from "gsap";
 import scrollTrigger from "gsap/ScrollTrigger";

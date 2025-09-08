@@ -45,6 +45,28 @@ const contactUs = () => {
 
             <form className={styles.form} onSubmit={handleSubmit(submitForm)} id='contact-us-form' ref={form}>
                 <input
+                    {...register('name', {
+                        required: {
+                            value: true,
+                            message: "Your name is required."
+                        },
+                        minLength:{
+                            value: 3,
+                            message: 'Name must be at least 3 characters long',
+                        },
+                        maxLength:{
+                            value: 50,
+                            message: 'Name cannot exceed 50 characters',
+                        }
+                    })}
+                    type="text"
+                    className={styles.inputs}
+                    placeholder='Enter your full name.'
+                />
+
+                {errors.name && <p style={{ color: "red" }}>{errors.name.message}</p>}
+
+                <input
                     {...register('email', {
                         pattern: {
                             value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
@@ -52,9 +74,8 @@ const contactUs = () => {
                         }
                     })}
                     type="email"
-                    name="email"
                     className={styles.inputs}
-                    placeholder='Enter your valid Email.'
+                    placeholder='Enter your valid Email (Optional)'
                 />
                 {errors.email && <p style={{ color: "red" }}>{errors.email.message}</p>}
 
@@ -63,14 +84,14 @@ const contactUs = () => {
                         required: 'The phone number is required!',
                         minLength: {
                             value: 10,
-                            message: 'The phone number should be at least 5 characters!'
+                            message: 'The phone number should be at least 10 characters!'
                         },
                         maxLength: {
                             value: 15,
-                            message: "Phone number cannot exceed 100 characters!"
+                            message: "Phone number cannot exceed 15 characters!"
                         }
                     })}
-                    type="number" name="phone" className={styles.inputs} placeholder='Enter your valid phone number.' />
+                    type="number" className={styles.inputs} placeholder='Enter your valid phone number.' />
 
                 {errors.phone && <p style={{ color: "red" }}>{errors.phone.message}</p>}
 
@@ -86,7 +107,7 @@ const contactUs = () => {
                             message: 'Subject cannot exceed 100 characters!'
                         }
                     })}
-                    type="text" name='subject' className={styles.inputs} placeholder='Write you subject.' />
+                    type="text" className={styles.inputs} placeholder='Write you subject.' />
 
                 {errors.subject && <p style={{ color: "red" }}>{errors.subject.message}</p>}
 
@@ -103,7 +124,7 @@ const contactUs = () => {
                             message: "Message cannot exceed 1000 characters"
                         }
                     })}
-                    name="message" className={styles.messageInput + ' ' + styles.inputs}
+                    className={styles.messageInput + ' ' + styles.inputs}
                     placeholder='write your message...'></textarea>
 
                     {errors.message && <p style={{ color: "red" }}>{errors.message.message}</p>}

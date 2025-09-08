@@ -26,4 +26,10 @@ This project is a **modern animated school website frontend** that provides smoo
 - **React** – Frontend framework  
 - **Vanilla CSS** – Styling  
 - **GSAP & ScrollTrigger** – Animations  
-- **JavaScript (ES6+)** – Core logic  
+- **JavaScript (ES6+)** – Core logic
+
+---
+
+## 🌍 Live Demo  
+
+🔗 [Click here to view the live website](https://your-live-demo-link.com) 

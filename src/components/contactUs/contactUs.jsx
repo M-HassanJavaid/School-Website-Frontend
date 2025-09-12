@@ -1,31 +1,35 @@
-import { useRef, useState , useEffect } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import styles from './contactUs.module.css'
 import Button from "../Button/Button.jsx"
 import { useForm } from 'react-hook-form'
 import gsap from 'gsap'
+import Loader from '../Loader/Loader.jsx'
+import AlertBox from '../AlertBox/AlertBox.jsx'
 
 const contactUs = () => {
+
+    const [AlertMessage, setAlertMessage] = useState('');
 
     const form = useRef()
     const formHeading = useRef()
 
     useEffect(() => {
-      [form.current , formHeading.current].forEach((elem)=>{
-        gsap.fromTo(elem , 
-            {
-                y: 500,
-                filter: 'blur(20px)',
-            }, 
-            {
-                y: 0,
-                filter: 'blur(0px)',
-                duration: 2,
-            }
-        )
-      })
+        [form.current, formHeading.current].forEach((elem) => {
+            gsap.fromTo(elem,
+                {
+                    y: 500,
+                    filter: 'blur(20px)',
+                },
+                {
+                    y: 0,
+                    filter: 'blur(0px)',
+                    duration: 1,
+                }
+            )
+        })
 
     }, [])
-    
+
 
     const {
         register,
@@ -35,8 +39,18 @@ const contactUs = () => {
     } = useForm({ mode: 'onChange' })
 
     async function submitForm(data) {
-        console.log(data)
-        reset()
+        try {
+            await fetch('https://school-website-backend.up.railway.app/submitContactForm', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data)
+            });
+            setAlertMessage('Thanks for contacting us, We will reply you soon.')
+        } catch (error) {
+            setAlertMessage('Due to some error contact form could not submit.')
+        }
     }
 
     return (
@@ -50,11 +64,11 @@ const contactUs = () => {
                             value: true,
                             message: "Your name is required."
                         },
-                        minLength:{
+                        minLength: {
                             value: 3,
                             message: 'Name must be at least 3 characters long',
                         },
-                        maxLength:{
+                        maxLength: {
                             value: 50,
                             message: 'Name cannot exceed 50 characters',
                         }
@@ -68,6 +82,10 @@ const contactUs = () => {
 
                 <input
                     {...register('email', {
+                        required: {
+                            value: true,
+                            message: 'Email is required!'
+                        },
                         pattern: {
                             value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                             message: 'Your email format is wrong!'
@@ -75,7 +93,7 @@ const contactUs = () => {
                     })}
                     type="email"
                     className={styles.inputs}
-                    placeholder='Enter your valid Email (Optional)'
+                    placeholder='Enter your valid Email.'
                 />
                 {errors.email && <p style={{ color: "red" }}>{errors.email.message}</p>}
 
@@ -127,10 +145,12 @@ const contactUs = () => {
                     className={styles.messageInput + ' ' + styles.inputs}
                     placeholder='write your message...'></textarea>
 
-                    {errors.message && <p style={{ color: "red" }}>{errors.message.message}</p>}
+                {errors.message && <p style={{ color: "red" }}>{errors.message.message}</p>}
 
-                <Button title='Send Message' internalLink='/' extraStyles={styles.btn} formId={"contact-us-form"}/>
+                {!isSubmitting && <Button title='Send Message' internalLink='/' extraStyles={styles.btn} formId={"contact-us-form"} />}
             </form>
+            {AlertMessage && <AlertBox AlertMessage={AlertMessage} setAlertMessage={setAlertMessage} />}
+            {isSubmitting && <Loader />}
         </section>
     )
 }

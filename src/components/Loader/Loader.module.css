@@ -1,0 +1,24 @@
+.loader {
+    height: 100px;
+    width: 100px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border-block: 10px solid var(--primary-color);
+    border-inline: 10px solid var(--secondary-color);
+    animation: loader 1s infinite;
+}
+
+@keyframes loader {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+        
+    }
+}

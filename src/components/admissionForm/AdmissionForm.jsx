@@ -1,9 +1,14 @@
-import React from 'react'
+import { useState } from 'react'
 import styles from './AdmissionForm.module.css'
 import Button from '../Button/Button.jsx'
 import { useForm } from 'react-hook-form'
+import AlertBox from '../AlertBox/AlertBox.jsx'
+import Loader from '../Loader/Loader.jsx'
+
 
 const AdmissionForm = () => {
+
+  const [AlertMessage, setAlertMessage] = useState('');
 
   const {
     register,
@@ -12,8 +17,27 @@ const AdmissionForm = () => {
     formState: { errors, isSubmitting },
   } = useForm({ mode: 'onChange' })
 
+  //{ studentName, fatherName, dateOfBirth, phone, email, classToAdmission }
+
   async function submitForm(data) {
-    console.log(data)
+    try {
+      let res = await fetch('https://school-website-backend.up.railway.app/submitAdmission', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+      })
+      res = await res.json();
+      if (res.isSuccess) {
+        setAlertMessage('Your Admission form has succefully submitted.');
+        reset();
+        return
+      }
+      throw new Error()
+    } catch (error) {
+      setAlertMessage(error.message)
+    }
   }
 
   function isDobValid(value) {
@@ -36,7 +60,7 @@ const AdmissionForm = () => {
 
     // min age check
     if (age < 1) {
-      return "Student must be at least 5 years old";
+      return "Student must be at least 1 years old";
     }
 
     return true; // ✅ passed all checks
@@ -48,7 +72,7 @@ const AdmissionForm = () => {
       <form className={styles.form} id='admissionForm' onSubmit={handleSubmit(submitForm)}>
 
         {/* student's Name Input */}
-        <input {...register('name', {
+        <input {...register('studentName', {
           required: `Student's name is required!`,
           minLength: {
             value: 3,
@@ -59,9 +83,9 @@ const AdmissionForm = () => {
             message: `Student's name cannot exceed 50 characters!`
           },
         })}
-          type="text" name="name" id="name" placeholder="Enter Student's full name." className={styles.inputs} />
+          type="text" id="name" placeholder="Enter Student's full name." className={styles.inputs} />
 
-        {errors.name && <p style={{ color: 'red' }}>{errors.name.message}</p>}
+        {errors.studentName && <p style={{ color: 'red' }}>{errors.studentName.message}</p>}
 
         {/* Fathers Name */}
         <input {...register('fatherName', {
@@ -103,23 +127,27 @@ const AdmissionForm = () => {
         })}
           type="tel" name='phone' id='phone' placeholder='Enter a valid phone number' className={styles.inputs} />
 
-        {errors.phone && <p style={{color: "red"}} >{errors.phone.message}</p>}
+        {errors.phone && <p style={{ color: "red" }} >{errors.phone.message}</p>}
 
         <input {...register('email', {
+          required: {
+            value: true,
+            message: 'Email is required!'
+          },
           pattern: {
             value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
             message: "Please enter a valid email address",
           }
         })}
-          type="email" name='email' id='emaild' placeholder='Enter a valide email id. (Optional)' className={styles.inputs} />
+          type="email" name='email' id='emaild' placeholder='Enter a valide email id.' className={styles.inputs} />
 
-        {errors.email && <p style={{color: "red"}}>{errors.email.message}</p>}
+        {errors.email && <p style={{ color: "red" }}>{errors.email.message}</p>}
 
-        <select {...register('classApplyingFor', {
+        <select {...register('classToAdmission', {
           required: 'Please select your class!',
           validate: (value) => value !== "" || "Please select your class!"
         })}
-          name="classApplyingFor" id="classApplyingFor" className={styles.inputs}>
+          name="classToAdmission" id="classApplyingFor" className={styles.inputs}>
           <option value="">-- Select your class --</option>
           <option value="nursery">Nursery</option>
           <option value="kg1">KG 1</option>
@@ -136,11 +164,13 @@ const AdmissionForm = () => {
           <option value="10">10</option>
         </select>
 
-        {errors.classApplyingFor && <p style={{color: "red"}} >{errors.classApplyingFor.message}</p>}
+        {errors.classToAdmission && <p style={{ color: "red" }} >{errors.classToAdmission.message}</p>}
 
 
-        <Button formId='admissionForm' extraStyles={styles.btn} title='Submit Now' />
+        {!isSubmitting && <Button formId='admissionForm' extraStyles={styles.btn} title='Submit Now' />}
       </form>
+      {AlertMessage && <AlertBox AlertMessage={AlertMessage} setAlertMessage={setAlertMessage} />}
+      {isSubmitting && <Loader />}
     </section>
   )
 }
